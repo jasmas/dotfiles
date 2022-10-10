@@ -1,0 +1,13 @@
+[commit]
+	gpgsign = true
+[gpg]
+	program = gpg2
+[user]
+    #signingkey = E68A18E2FC5DADEE309544C95F4F6B0734D5C442
+	signingkey = F6E313912F3E406A75E10E1F3AA63AE30AAC0F10
+    name = Jason Masker
+	email = masker@post.harvard.edu
+[tag]
+	forceSignAnnotated = true
+[init]
+	defaultBranch = master
