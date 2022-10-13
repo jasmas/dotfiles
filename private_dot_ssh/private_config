@@ -1,0 +1,37 @@
+UserKnownHostsFile=/dev/null
+StrictHostKeyChecking no
+ForwardAgent yes
+ForwardX11 yes
+ForwardX11Trusted yes
+#PasswordAuthentication no
+
+Host dgx1 172.31.7.10
+User jasmas
+
+Host github.com gist.github.com gitlab.presidio.com 172.16.17.248
+  PubkeyAcceptedKeyTypes -rsa-sha2-256
+  HostKeyAlgorithms -rsa-sha2-256
+  LogLevel quiet 
+  ForwardX11 no
+  ForwardX11Trusted no
+
+Host pi.masker.net
+  ProxyCommand bash -c '/usr/local/bin/cloudflared access ssh-gen --hostname %h; ssh -tt %r@cfpipe-pi.masker.net >&2 <&1'
+
+Host cfpipe-pi.masker.net
+  HostName pi.masker.net
+  ProxyCommand /usr/local/bin/cloudflared access ssh --hostname %h
+  IdentityFile ~/.cloudflared/pi.masker.net-cf_key
+  CertificateFile ~/.cloudflared/pi.masker.net-cf_key-cert.pub
+
+Host s42.masker.net
+  HostName s42-ssh.masker.net
+  User Jason
+  ProxyCommand /usr/local/bin/cloudflared access ssh --hostname %h
+
+Host *
+  #PubkeyAcceptedKeyTypes -ssh-ed25519-cert-v01@openssh.com,ecdsa-sha2-nistp256-cert-v01@openssh.com,ecdsa-sha2-nistp384-cert-v01@openssh.com,ecdsa-sha2-nistp521-cert-v01@openssh.com,sk-ssh-ed25519-cert-v01@openssh.com,sk-ecdsa-sha2-nistp256-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com,rsa-sha2-256-cert-v01@openssh.com,ssh-ed25519,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,sk-ssh-ed25519@openssh.com,sk-ecdsa-sha2-nistp256@openssh.com,rsa-sha2-512,rsa-sha2-256
+  #HostKeyAlgorithms -ssh-ed25519-cert-v01@openssh.com,ecdsa-sha2-nistp256-cert-v01@openssh.com,ecdsa-sha2-nistp384-cert-v01@openssh.com,ecdsa-sha2-nistp521-cert-v01@openssh.com,sk-ssh-ed25519-cert-v01@openssh.com,sk-ecdsa-sha2-nistp256-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com,rsa-sha2-256-cert-v01@openssh.com,ssh-ed25519,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,sk-ecdsa-sha2-nistp256@openssh.com,sk-ssh-ed25519@openssh.com,rsa-sha2-512,rsa-sha2-256
+  User admin
+
+
