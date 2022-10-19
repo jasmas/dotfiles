@@ -16,18 +16,18 @@ Host github.com gist.github.com gitlab.presidio.com 172.16.17.248
   ForwardX11Trusted no
 
 Host pi.masker.net
-  ProxyCommand bash -c '/usr/local/bin/cloudflared access ssh-gen --hostname %h; ssh -tt %r@cfpipe-pi.masker.net >&2 <&1'
+  ProxyCommand bash -c 'cloudflared access ssh-gen --hostname %h; ssh -tt %r@cfpipe-pi.masker.net >&2 <&1'
 
 Host cfpipe-pi.masker.net
   HostName pi.masker.net
-  ProxyCommand /usr/local/bin/cloudflared access ssh --hostname %h
+  ProxyCommand cloudflared access ssh --hostname %h
   IdentityFile ~/.cloudflared/pi.masker.net-cf_key
   CertificateFile ~/.cloudflared/pi.masker.net-cf_key-cert.pub
 
 Host s42.masker.net
   HostName s42-ssh.masker.net
   User Jason
-  ProxyCommand /usr/local/bin/cloudflared access ssh --hostname %h
+  ProxyCommand cloudflared access ssh --hostname %h
 
 Host *
   #PubkeyAcceptedKeyTypes -ssh-ed25519-cert-v01@openssh.com,ecdsa-sha2-nistp256-cert-v01@openssh.com,ecdsa-sha2-nistp384-cert-v01@openssh.com,ecdsa-sha2-nistp521-cert-v01@openssh.com,sk-ssh-ed25519-cert-v01@openssh.com,sk-ecdsa-sha2-nistp256-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com,rsa-sha2-256-cert-v01@openssh.com,ssh-ed25519,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,sk-ssh-ed25519@openssh.com,sk-ecdsa-sha2-nistp256@openssh.com,rsa-sha2-512,rsa-sha2-256
